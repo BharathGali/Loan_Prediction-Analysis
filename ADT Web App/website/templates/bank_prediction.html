@@ -1,134 +1,76 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <!-- <link rel="stylesheet" href="/static/styles/predictions.css"> -->
-    <link rel="stylesheet" href="../static/styles/predictions.css">
+    <link rel="stylesheet" href="/static/styles/style1.css" />
+    <link rel="stylesheet" href="../static/styles/style1.css" />
     <title>prediction</title>
   </head>
   <body>
-  <section class="text-white-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-col text-center w-full mb-20">
-      
-      <h3 >Loan prediction project</h3>
-      <!-- <p >fill the form for prediction</p> -->
-      <div class="pred"><h2></h2></div>
+    <div class="navbar">
+      <div class="contaier">
+        <div class="navbar-header">
+          <button class="toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <ul class="nav navcollaps">
+          <li><a href="{{ url_for('views.home') }}">Home</a></li>
+          <li>
+            <a href="{{ url_for('loan_pred.loan_preds') }}">Loan Prediction</a>
+          </li>
+          <li>
+            <a href="{{ url_for('bank_pred.bank_preds') }}">Bank Prediction</a>
+          </li>
+          <li><a href="{{ url_for('team.teams') }}">Team</a></li>
+          <li><a href="{{ url_for('about.abouts') }}">About</a></li>
+        </ul>
+      </div>
     </div>
-    
-<form action='/predict' method='POST'>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label"> Gender</label>
-  <select class="form-select" id="gender" name="gender" aria-label="Default select example">
-  <option selected>-- select gender --</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label"> Married Status</label>
-  <select class="form-select" id="married" name="married" aria-label="Default select example">
-  <option selected>-- select married status --</option>
-  <option value="Yes">Yes</option>
-  <option value="No">No</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Dependents</label>
-  <select class="form-select" id="dependents" name="dependents" aria-label="Default select example">
-  <option selected>-- select dependents --</option>
-  <option value="0">0</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3+">3+</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Education</label>
-  <select class="form-select" id="education" name="education" aria-label="Default select example">
-  <option selected>-- select education --</option>
-  <option value="Graduate">Graduate</option>
-  <option value="Not Graduate">Not Graduate</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Self_Employed</label>
-  <select class="form-select" id="employed" name="employed" aria-label="Default select example">
-  <option selected>-- select Self_Employed --</option>
-  <option value="Yes">Yes</option>
-  <option value="No">No</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Credit_History</label>
-  <select class="form-select" id="credit" name="credit" aria-label="Default select example">
-  <option selected>-- select Credit_History --</option>
-  <option value="1.000000">1.000000</option>
-  <option value="0.000000">0.000000</option>
-  <option value="0.842199">0.842199</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Property_Area</label>
-  <select class="form-select" id="area" name="area" aria-label="Default select example">
-  <option selected>-- select Property_Area --</option>
-  <option value="Semiurban">Semiurban</option>
-  <option value="Urban">Urban</option>
-  <option value="Rural">Rural</option>
-</select>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Enter ApplicantIncome</label>
-  <input type="text" style="color:#112d4e" class="form-control" id="ApplicantIncome" name="ApplicantIncome" placeholder="ApplicantIncome">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Enter CoapplicantIncome</label>
-  <input type="text" style="color:#112d4e" class="form-control" id="CoapplicantIncome" name="CoapplicantIncome" placeholder="CoapplicantIncome">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Enter LoanAmount</label>
-  <input type="text" style="color:#112d4e" class="form-control" id="LoanAmount" name="LoanAmount" placeholder="LoanAmount">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Enter Loan_Amount_Term in Days</label>
-  <input type="text" style="color:#112d4e" class="form-control" id="Loan_Amount_Term" name="Loan_Amount_Term" placeholder="Loan_Amount_Term">
-</div>
 
+    <div class="team-wapper">
+      <img src="../static/assets/home.jpeg" alt="Girl in a jacket" style="height: 100vh;  width: 100%; margin-top: 20%; margin-right: 0; opacity: 0.3; background-size: cover; position: fixed;">
+      <h1 style = "background-color: rgb(214, 208, 196); width: 100%; margin-left: 0%; margin-right: 0%; text-align: center; font-family: 'Dancing Script', cursive;font-weight: bolder; font-size: 7vh; ">Pro-lo Giving You To The Point Info</h1>
+      <div class="clients-logo" style = "margin-top: 10%; ">
+        <form action="{{ url_for('bank_pred.download') }}" method="POST" style = "margin-top: -10%; position: relative; font-family: 'Dancing Script', cursive; font-size: large; font-weight: bolder;">
+     
+        <input type="image" src="../static/assets/CIBC.png" name="bankname" id="bankname" value="CIBC"  width="48" height="48" style = "margin-left: -15%;">
+        <input type="image" src="../static/assets/scotiabank.png" name="bankname"  id="bankname" value="Bank of Nova Scotia"  width="48" height="48" style = "margin-left: 15%; margin-right: 5%; ">
+        <input type="image" src="../static/assets/RBC.png" name="bankname"  id="bankname" value="Royal Bank of Canada"  width="48" height="48" style = "margin-left: -15%;">
+        <input type="image" src="../static/assets/bmo.png" name="bankname"  id="bankname" value="Bank of Montreal"  width="48" height="48"style = "margin-left: 15%; margin-right: 5%; ">
+        <input type="image" src="../static/assets/Canadian_Western_Bank_Logo.png" name="bankname"  id="bankname" value="Canadian Western Bank"  width="48" height="48" style = "margin-left: -15%;">
+        <input type="image" src="../static/assets/desjardins.png" name="bankname"  id="bankname" value="Desjardins Group"  width="48" height="48"style = "margin-left: 15%; margin-right: 5%; ">
+        <input type="image" src="../static/assets/hsbc.jpg" name="bankname"  id="bankname" value="HSBC Bank"  width="48" height="48" style = "margin-left: -15%;">
+        <input type="image" src="../static/assets/laurentian.png" name="bankname" id="bankname" value="Laurentian Bank of Canada"  width="48" height="48"style = "margin-left: 15%; margin-right: 5%; ">
+        <input type="image" src="../static/assets/National_Bank_of_Canada-Logo.png" name="bankname"  id="bankname" value="National Bank"  width="48" height="48" style = "margin-left: -15%;">
+        <input type="image" src="../static/assets/Toronto-Dominion_Bank_logo.png" name="bankname"  id="bankname" value="Toronto-Dominion Bank"  width="48" height="48"style = "margin-left: 15%; margin-right: 5%; ">
 
+        </form>
+      </div>
+    </div>
 
-
-    <button type="submit" >Predict
-      <i class="zmdi zmdi-arrow-right"></i>
-    </button>
-    <br>
-    
-   
-    </form>
-    <div class="backbut">
-    <a href="{{ url_for('views.home') }}" class="link-button"><button> Back</button> </a>
-  </div>
-    
-    
-  </div>
-</section>
-    
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
